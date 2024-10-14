@@ -56,26 +56,6 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center mb-16"
           >
-            <div className="relative">
-              <Image
-                src="/placeholder.svg?height=150&width=150"
-                alt="Manuel Lorenzo G. Pereira"
-                width={150}
-                height={150}
-                className="rounded-full mb-4"
-              />
-              <motion.div
-                className="absolute -inset-1 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500"
-                animate={{
-                  rotate: [0, 360],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
-            </div>
             <h1 className="text-4xl font-bold mb-2 text-center">
               Manuel Lorenzo G. Pereira
             </h1>
@@ -83,8 +63,14 @@ export default function Home() {
               Software Engineer
             </h2>
             <div className="flex space-x-4">
-              <SocialButton icon={<GithubIcon className="h-4 w-4" />} />
-              <SocialButton icon={<LinkedinIcon className="h-4 w-4" />} />
+              <SocialButton
+                link="https://github.com/Kylef67"
+                icon={<GithubIcon className="h-4 w-4" />}
+              />
+              <SocialButton
+                link="https://www.linkedin.com/in/manuel-lorenzo-pereira-01a20b101/"
+                icon={<LinkedinIcon className="h-4 w-4" />}
+              />
               <SocialButton icon={<MailIcon className="h-4 w-4" />} />
             </div>
           </motion.div>
@@ -94,7 +80,7 @@ export default function Home() {
               <SkillCard
                 icon={<CloudIcon className="h-6 w-6" />}
                 title="AWS"
-                description="Lambda, S3, EC2, RDS"
+                description="Lambda, S3, EC2, RDS, SNS, SQS"
               />
               <SkillCard
                 icon={<ServerIcon className="h-6 w-6" />}
@@ -104,7 +90,7 @@ export default function Home() {
               <SkillCard
                 icon={<CodeIcon className="h-6 w-6" />}
                 title="Frontend"
-                description="React, Vue, Angular"
+                description="React, Vue, Blade"
               />
               <SkillCard
                 icon={<FileTextIcon className="h-6 w-6" />}
@@ -117,12 +103,12 @@ export default function Home() {
           <Section title="Projects" delay={0.3}>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               <ProjectCard
-                title="Project 1"
-                description="A brief description of Project 1"
+                title="Will be added soon..."
+                description="..."
                 imageUrl="/placeholder.svg?height=200&width=300"
                 projectUrl="https://project1.com"
               />
-              <ProjectCard
+              {/* <ProjectCard
                 title="Project 2"
                 description="A brief description of Project 2"
                 imageUrl="/placeholder.svg?height=200&width=300"
@@ -133,7 +119,7 @@ export default function Home() {
                 description="A brief description of Project 3"
                 imageUrl="/placeholder.svg?height=200&width=300"
                 projectUrl="https://project3.com"
-              />
+              /> */}
             </div>
           </Section>
 
@@ -187,10 +173,12 @@ export default function Home() {
           <Section title="Certifications" delay={0.6}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <CertificationCard
+                link="https://www.credly.com/badges/927a1907-6dbc-4b62-b6bd-4fb74f2635c2/public_url"
                 title="AWS Certified DevOps - Professional"
                 period="Jul 2024 – Jul 2027"
               />
               <CertificationCard
+                link="https://www.credly.com/badges/398966f0-c3e8-4ad7-b4e1-af4f81a9d6cf/public_url"
                 title="AWS Certified Developer - Associate"
                 period="Dec 2021 – Jul 2027"
               />
@@ -198,18 +186,20 @@ export default function Home() {
           </Section>
 
           <Section title="Education" delay={0.8}>
-            <Card className="bg-gray-800 bg-opacity-50 text-white backdrop-blur-lg">
-              <CardContent className="p-6">
-                <h4 className="text-xl font-semibold mb-2">
-                  Bachelor of Science in Information Technology
-                </h4>
-                <p className="text-gray-300">
-                  Informatics International College (Now Gardner College –
-                  Cainta)
-                </p>
-                <p className="text-gray-400">2014</p>
-              </CardContent>
-            </Card>
+            <div className="space-y-8">
+              <Card className="bg-gray-800 bg-opacity-50 text-white backdrop-blur-lg gap-4">
+                <CardContent className="p-6">
+                  <h4 className="text-xl font-semibold mb-2">
+                    Bachelor of Science in Information Technology
+                  </h4>
+                  <p className="text-gray-300">
+                    Informatics International College (Now Gardner College –
+                    Cainta)
+                  </p>
+                  <p className="text-gray-400">2014</p>
+                </CardContent>
+              </Card>
+            </div>
           </Section>
         </main>
       </div>
@@ -268,10 +258,17 @@ function Section({
   );
 }
 
-function SocialButton({ icon }: { icon: React.ReactNode }) {
+function SocialButton({
+  icon,
+  link,
+}: {
+  icon: React.ReactNode;
+  link?: string;
+}) {
   return (
     <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
       <Button
+        onClick={() => window.open(link, "_blank")}
         variant="outline"
         size="icon"
         className="bg-gray-800 bg-opacity-50 backdrop-blur-lg"
@@ -384,12 +381,18 @@ function ExperienceCard({
 function CertificationCard({
   title,
   period,
+  link,
 }: {
   title: string;
   period: string;
+  link?: string;
 }) {
   return (
-    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={() => window.open(link, "_blank")}
+    >
       <Card className="bg-gray-800 bg-opacity-50 text-white backdrop-blur-lg">
         <CardContent className="p-6">
           <h4 className="text-xl font-semibold mb-2">{title}</h4>
