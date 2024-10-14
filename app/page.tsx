@@ -56,10 +56,10 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center mb-16"
           >
-            <h1 className="text-4xl font-bold mb-2 text-center">
+            <h1 className="text-5xl font-bold mb-2 text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500">
               Manuel Lorenzo G. Pereira
             </h1>
-            <h2 className="text-2xl text-gray-300 mb-4 text-center">
+            <h2 className="text-2xl text-gray-300 mb-6 text-center">
               Software Engineer
             </h2>
             <div className="flex space-x-4">
@@ -80,7 +80,7 @@ export default function Home() {
               <SkillCard
                 icon={<CloudIcon className="h-6 w-6" />}
                 title="AWS"
-                description="Lambda, S3, EC2, RDS, SNS, SQS"
+                description="Lambda, S3, EC2, SQS etc."
               />
               <SkillCard
                 icon={<ServerIcon className="h-6 w-6" />}
@@ -108,18 +108,6 @@ export default function Home() {
                 imageUrl="/placeholder.svg?height=200&width=300"
                 projectUrl="https://project1.com"
               />
-              {/* <ProjectCard
-                title="Project 2"
-                description="A brief description of Project 2"
-                imageUrl="/placeholder.svg?height=200&width=300"
-                projectUrl="https://project2.com"
-              />
-              <ProjectCard
-                title="Project 3"
-                description="A brief description of Project 3"
-                imageUrl="/placeholder.svg?height=200&width=300"
-                projectUrl="https://project3.com"
-              /> */}
             </div>
           </Section>
 
@@ -186,20 +174,18 @@ export default function Home() {
           </Section>
 
           <Section title="Education" delay={0.8}>
-            <div className="space-y-8">
-              <Card className="bg-gray-800 bg-opacity-50 text-white backdrop-blur-lg gap-4">
-                <CardContent className="p-6">
-                  <h4 className="text-xl font-semibold mb-2">
-                    Bachelor of Science in Information Technology
-                  </h4>
-                  <p className="text-gray-300">
-                    Informatics International College (Now Gardner College –
-                    Cainta)
-                  </p>
-                  <p className="text-gray-400">2014</p>
-                </CardContent>
-              </Card>
-            </div>
+            <Card className="bg-gray-800 bg-opacity-50 text-white backdrop-blur-lg">
+              <CardContent className="p-6">
+                <h4 className="text-xl font-semibold mb-2">
+                  Bachelor of Science in Information Technology
+                </h4>
+                <p className="text-gray-300">
+                  Informatics International College (Now Gardner College –
+                  Cainta)
+                </p>
+                <p className="text-gray-400">2014</p>
+              </CardContent>
+            </Card>
           </Section>
         </main>
       </div>
@@ -213,7 +199,7 @@ function CardContent({
   className,
 }: {
   children: React.ReactNode;
-  className: string;
+  className?: string;
 }) {
   return <div className={`${className}`}>{children}</div>;
 }
@@ -268,10 +254,10 @@ function SocialButton({
   return (
     <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
       <Button
-        onClick={() => window.open(link, "_blank")}
+        onClick={() => link && window.open(link, "_blank")}
         variant="outline"
         size="icon"
-        className="bg-gray-800 bg-opacity-50 backdrop-blur-lg"
+        className="bg-gray-800 bg-opacity-50 backdrop-blur-lg hover:bg-gray-700"
       >
         {icon}
       </Button>
@@ -290,7 +276,7 @@ function SkillCard({
 }) {
   return (
     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-      <Card className="bg-gray-800 bg-opacity-50 text-white backdrop-blur-lg">
+      <Card className="bg-gray-800 bg-opacity-50 text-white backdrop-blur-lg hover:bg-gray-700 transition-colors duration-200">
         <CardContent className="p-6 flex flex-col items-center text-center">
           {icon}
           <h4 className="text-lg font-semibold mt-2">{title}</h4>
@@ -314,7 +300,7 @@ function ProjectCard({
 }) {
   return (
     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-      <Card className="bg-gray-800 bg-opacity-50 text-white backdrop-blur-lg overflow-hidden">
+      <Card className="bg-gray-800 bg-opacity-50 text-white backdrop-blur-lg overflow-hidden hover:bg-gray-700 transition-colors duration-200">
         <Image
           src={imageUrl}
           alt={title}
@@ -355,14 +341,14 @@ function ExperienceCard({
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Card className="bg-gray-800 bg-opacity-50 text-white backdrop-blur-lg">
+      <Card className="bg-gray-800 bg-opacity-50 text-white backdrop-blur-lg hover:bg-gray-700 transition-colors duration-200">
         <CardContent className="p-6">
           <h4 className="text-xl font-semibold mb-1">{title}</h4>
           <p className="text-gray-300 mb-2">{company}</p>
           <p className="text-gray-400 text-sm mb-3">{period}</p>
           <p className="text-gray-300 mb-4">{description}</p>
           <div className="flex flex-wrap gap-2">
-            {technologies.map((tech, index) => (
+          {technologies.map((tech, index) => (
               <Badge
                 key={index}
                 variant="secondary"
@@ -391,9 +377,9 @@ function CertificationCard({
     <motion.div
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      onClick={() => window.open(link, "_blank")}
+      onClick={() => link && window.open(link, "_blank")}
     >
-      <Card className="bg-gray-800 bg-opacity-50 text-white backdrop-blur-lg">
+      <Card className="bg-gray-800 bg-opacity-50 text-white backdrop-blur-lg hover:bg-gray-700 transition-colors duration-200 cursor-pointer">
         <CardContent className="p-6">
           <h4 className="text-xl font-semibold mb-2">{title}</h4>
           <p className="text-gray-400">{period}</p>
